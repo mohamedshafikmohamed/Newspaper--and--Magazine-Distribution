@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebApplication9.Models.ApplicationUser>
+           @using System;
+
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.Owin.Security;
+@using WebApplication9.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@foreach (var item in Model)
+{
+   
+    UserManager<ApplicationUser> UserManager=new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    if (UserManager.IsInRole(item.Id, "supplier"))
+    {
+        using (Html.BeginForm("subscripe_shop_p", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+            <h2 style="font-family:Calibri">   @Html.DisplayFor(modelItem => item.UserName)</h2>
+        
+            <input type="text" name="id" value=@item.Id  style="display:none;"/>
+            <div style="margin-left:1000px;">  <input type="submit" value="Subscripe this shop" class="btn btn-warning" style="font-family:Calibri; margin-left:10px;" /></div>
+
+}
+         <div >
+
+                  
+
+                </div>
+        <br />
+        
+        
+    <div class="row" style="background-color: rgb(185, 154, 209);">
+        @foreach(var i in item.products)
+        {
+        
+        <div class="col-md-2 thumbnail " style="margin-left:20px; margin-bottom:30px; height:340px; margin-top:20px; ">
+          
+            <h4 style="margin-left:20px; font-family:Ebrima;">@Html.DisplayFor(model => i.name)</h4>
+              <img src="~/pics/@Html.DisplayFor(modelItem => i.image)" class="thumbnail" width="120" height="110"  style=" margin-left: 10px; font-family:Calibri"/>
+            <h5 style="margin-left: 20px; font-family: Calibri"> @Html.DisplayFor(modelItem => i.description)</h5>
+
+
+           <h6 style="margin-left: 20px; font-family: Calibri"> @Html.DisplayFor(modelItem => i.price)$</h6>
+
+            <div style="margin-left:20px;">
+
+               
+               
+  @using (Html.BeginForm("subscripe", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+                         @Html.ActionLink("Details", "Details", new { id = i.id }, new { @class = "btn btn-primary btn-large" })
+                
+                <input type="submit" value="subscripe" name=@i.id class="btn btn-warning" style="font-family:Calibri; margin-left:10px;" />
+                <input type="text" name="id" value=@i.id  style="display:none"/>
+   
+               
+}
+            </div>
+        </div>
+        
+        }
+        <br />
+     
+
+    </div>
+}
+}
+

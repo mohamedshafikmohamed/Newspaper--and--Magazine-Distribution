@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication9.Models.product>
+@using System;
+
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.Owin.Security;
+@using WebApplication9.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+
+<h1 style="font-family:Calibri;">Search result</h1>
+        <div class="row" style="background-color: rgb(214, 204, 224);">
+    @foreach (var i in Model)
+    {
+
+        <div class="col-md-2 thumbnail " style="margin-left:20px; margin-bottom:30px; height:320px; margin-top:20px; ">
+            <img src="~/pics/@Html.DisplayFor(modelItem => i.image)" class="thumbnail" width="120" height="110" style=" margin-left: 10px; font-family:Calibri" />
+            <h5 style="margin-left: 20px; font-family: Calibri"> @Html.DisplayFor(modelItem => i.description)</h5>
+
+
+            <h6 style="margin-left: 20px; font-family: Calibri"> @Html.DisplayFor(modelItem => i.price)$</h6>
+
+            <div style="margin-left:20px;">
+
+                @Html.ActionLink("Details", "Details", new { id = i.id }, new { @class = "btn btn-primary btn-large" })
+
+            </div>
+        </div>
+
+    }
+    <br />
+
+
+</div>
+
+    

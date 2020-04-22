@@ -1,0 +1,34 @@
+﻿@model WebApplication9.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your favorite shop</h2>
+
+<h3>@Html.DisplayFor(model => model.UserName)</h3>
+<div class="row" style="background-color: rgb(214, 204, 224);">
+  @if(Model!=null){  
+      foreach(var i in Model.products)
+        {
+
+        <div class="col-md-2 thumbnail " style="margin-left:20px; margin-bottom:30px; height:320px; margin-top:20px; ">
+            <img src="~/pics/@Html.DisplayFor(modelItem => i.image)" class="thumbnail" width="120" height="110" style=" margin-left: 10px; font-family:Calibri" />
+            <h5 style="margin-left: 20px; font-family: Calibri"> @Html.DisplayFor(modelItem => i.description)</h5>
+
+
+            <h6 style="margin-left: 20px; font-family: Calibri"> @Html.DisplayFor(modelItem => i.price)$</h6>
+            @using (Html.BeginForm("subscripe", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.ActionLink("Details", "Details", "Home", new { id = i.id }, new { @class = "btn btn-primary btn-large" })
+
+                <input type="submit" value="subscripe" name=@i.id class="btn btn-warning" style="font-family:Calibri; margin-left:10px;" />
+                <input type="text" name="id" value=@i.id style="display:none" />
+
+
+            }
+            
+        </div>
+    }
+    }
+    </div>

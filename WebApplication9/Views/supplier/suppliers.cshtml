@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebApplication9.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Suppliers</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+           Phone
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+
+            <td>
+
+
+                @Html.ActionLink("Delete "+item.UserName, "delete_supplier", "supplier", new { id = item.Id }, new { @class = "btn btn-danger" })
+
+            </td>
+          
+        </tr>
+    }
+
+</table>

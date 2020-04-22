@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebApplication9.Models.product>
+
+@{
+    ViewBag.Title = "seasonal_compaigns";
+}
+
+<h2>seasonal_compaigns</h2>
+@using (Html.BeginForm("seasonal_compaigns", "product", FormMethod.Post))
+{ 
+      <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="text"  name ="rate" style="width: 130px; border: 3px solid #ccc;" />
+            </div>
+        </div>
+    <br />
+    <br />
+       <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="make_compagins" class="btn btn-warning" />
+            </div>
+        </div>
+    
+     
+}

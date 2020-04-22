@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebApplication9.Models.orders>
+@using System;
+
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.Owin.Security;
+@using WebApplication9.Models;
+@{
+    ViewBag.Title = "orders";
+}
+
+<h2> Your Orders</h2>
+
+<table class="table">
+    <tr>
+       
+        <th>
+          Product Name
+        </th>
+        <th>
+         customer phone
+        </th>
+        <th>
+           Delivery Address
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.product.name)
+        </td>
+        <td>
+@{
+         
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id ==item.custId );
+             <h4>@currentUser.phone</h4>
+            }
+        </td>
+        <td>
+            @currentUser.Delivery_address
+        </td>
+        <td>
+          
+            @Html.ActionLink("Delete Order", "delete_orders", new { id = item.id }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+   
+}
+
+</table>

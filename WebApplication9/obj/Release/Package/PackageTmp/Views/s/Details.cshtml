@@ -1,0 +1,34 @@
+﻿@model WebApplication9.Models.subscripe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>subscripe</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.customer.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @using System;
+
+    @using Microsoft.AspNet.Identity;
+    @using Microsoft.AspNet.Identity.EntityFramework;
+    @using Microsoft.Owin.Security;
+    @using WebApplication9.Models;
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Newspaper  and  Magazine Distribution", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@if (Request.IsAuthenticated)
+{
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    
+  
+    
+    <li> @using (Html.BeginForm("search", "home", FormMethod.Post))
+         { 
+             <input type="text" name="search" placeholder="Search" id="search" style="width: 130px; border: 3px solid #ccc; border-radius: 7px; background-image: url(../pics/interface.png); background-repeat: no-repeat; background-position: 100px 3px ;margin-top:10px; height:35px; padding: 12px 10px 10px 10px; transition: width .04s ease-in-out; "  />
+    }
+      </li>
+    UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    if (UserManager.IsInRole(User.Identity.GetUserId(), "supplier"))
+    {
+          <li>@Html.ActionLink("Add Product", "Create", "product")</li>
+          <li>@Html.ActionLink("All Product", "Index", "product")</li>
+        
+    }
+    else if (UserManager.IsInRole(User.Identity.GetUserId(), "deliveryboy"))
+    {
+        
+        <li>@Html.ActionLink("Orders", "orders", "deliveryboy")</li>
+         
+    }
+    else if (UserManager.IsInRole(User.Identity.GetUserId(), "admin"))
+    {
+        <li>@Html.ActionLink("Suppliers", "suppliers", "supplier")</li>
+        <li>@Html.ActionLink("Add Supplier", "Register", "supplier")</li>
+     <li>@Html.ActionLink("Deliveryboys", "deliveryboys", "deliveryboy")</li>
+     <li>@Html.ActionLink(" Add deliveryboy", "add_deliveryboy", "deliveryboy")</li>
+     <li>@Html.ActionLink("Seasonal compaigns", "seasonal_compaigns", "product")</li>
+         
+         
+    
+    }
+    else
+{
+     
+      <li>@Html.ActionLink("subscripe's products", "subscripe_product", "subscipe")</li>
+      <li>@Html.ActionLink("subscripe's shop", "subscripe_shop", "subscipe")</li>
+    
+    
+}     
+}  
+           
+                
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

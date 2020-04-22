@@ -1,0 +1,38 @@
+﻿@model WebApplication9.Models.product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+@using (Html.BeginForm("make_order", "product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div style="font-family:Calibri;">
+    <h4>@Html.DisplayFor(model => model.name)</h4>
+
+   
+            <img src="~/pics/@Html.DisplayFor(model =>model.image)" class="thumbnail" width="220" height="290" />
+
+
+        
+            <h5 style="margin-left: 10px; font-family: Calibri; ">@Html.DisplayFor(model => model.description)</h5>
+       
+    <h6 style="margin-left: 10px; font-family: Calibri;">@Html.DisplayFor(model => model.price)$</h6> 
+ 
+    <h4 style="margin-left: 10px; font-family: Calibri;">Available : @Html.DisplayFor(model => model.stock) </h4>
+@if (Request.IsAuthenticated) {
+
+ <input type="submit" value="buy" class="btn btn-primary btn-large" style="font-family:Calibri; margin-left:10px;" />
+
+}
+
+else
+{
+    <h3>you must login first to buy this product</h3>
+}
+   
+   
+</div>
+
+}

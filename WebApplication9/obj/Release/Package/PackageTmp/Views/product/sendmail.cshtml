@@ -1,0 +1,20 @@
+﻿
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("sendmail", "product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <input type="submit" value="send_email" class="btn btn-primary btn-large" />
+
+}
+
+<div>
+    
+</div>
